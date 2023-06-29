@@ -1,55 +1,41 @@
-import Contatos from "../Contatos"
+import { useSelector } from "react-redux"
+import ButtonAdd from "../Button-Add"
+import Contatos from "../Contatos" //esse componente esta passando o type com props
 import * as S from "../ListaDeContatos/styled"
+import { RootReducer } from "../../Store"
 
 
 
-const contatos = [{
-    nome : 'thalls victor',
-    contato : 999516826,
-    email : 'Thallysvic173@gmail.com',
-    id : 1
-},
-{
-    nome : 'lorenna ',
-    contato : 999516826,
-    email : 'lorenna@gmail.com',
-    id : 1
-},
-{
-    nome : 'pitoca ',
-    contato : 999516826,
-    email : 'pitoco@gmail.com',
-    id : 1
-},
-]
+//Abaixo estou fazendo o map com a const 'contatos' para adicionar cada item do array na tabela, passando o parametro 'c' e as propriedades 
+const MainTabela = () => {
+    const {itens} = useSelector((state: RootReducer) => state.contatos)
 
+    return (
+        <S.MainContainer>
+            <S.Table>
+                <S.Thead>
+                    <S.Th>id</S.Th>
+                    <S.Th>nome</S.Th>
+                    <S.Th>contato</S.Th>
+                    <S.Th>email</S.Th>
+                    <S.Th>acoes</S.Th>
+                </S.Thead>
+                <S.Tbody>
+                    {itens.map((c) => 
+                        <Contatos key={c.id}
+                        id={c.id}
+                        nome={c.nome}
+                        contato={c.contato}
+                        email={c.email}
+                        />
+                        )}
+                </S.Tbody>
+            </S.Table>
+            <ButtonAdd/>
+        </S.MainContainer>
+         
+    )
+}
 
-const Tabela = () => (
-
-    <div>
-        <S.Table>
-            <S.Thead>
-                <S.Th>id</S.Th>
-                <S.Th>nome</S.Th>
-                <S.Th>contato</S.Th>
-                <S.Th>email</S.Th>
-                <S.Th>acoes</S.Th>
-            </S.Thead>
-            <S.Tbody>
-                {contatos.map((c) => 
-                <Contatos key={c.id}
-                id={c.id}
-                nome={c.nome}
-                contato={c.contato}
-                email={c.email}
-                />
-                )}
-            </S.Tbody>
-        </S.Table>
-    </div>
-    
-    
-)
-
-export default Tabela
+export default MainTabela
 

@@ -1,8 +1,16 @@
 import styled from 'styled-components'
 
+
+export const MainContainer = styled.main`
+width: 100vw;
+height: 100vh;
+
+`
+
+
 export const Table = styled.table`
-width: 80vw;
-height: 100%;
+width: 80%;
+height: 50%;
 margin: 0 auto;
 margin-top: 55px;
 
