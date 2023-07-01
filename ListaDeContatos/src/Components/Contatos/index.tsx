@@ -1,8 +1,8 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import * as S from "./styled"
-import { remover } from '../../Store/reducers/contatos'
+import { remover, editar } from '../../Store/reducers/contatos'
 import Contato from "../../Models/Contatos"
 
 type Props = Contato
@@ -13,8 +13,8 @@ const Contatos = ({nome, contato, email, id}: Props) => {
 //logica das tarefas
 
     const [edit, setEdit] = useState(false)
-
     const dispatch = useDispatch()
+
     return (
         <>                
         <S.Tr>
@@ -33,7 +33,16 @@ const Contatos = ({nome, contato, email, id}: Props) => {
         <S.Td className="Actions">
         {edit ? (
             <>
-            <S.Button>Salvar</S.Button>
+            <S.Button onClick={()=> {
+                dispatch(editar({
+                   nome,
+                   contato,
+                   email,
+                   id
+                })
+                )
+                setEdit(false)
+            }}>Salvar</S.Button>
             <S.Button onClick={()=> setEdit(false)}>Cancelar</S.Button>
             </>
         ) : (
